@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "0a6ea5ef-9a94-4c72-aa57-dfd4019dd28a",
+		"name": "credit-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "credit-service",
+			"item": [
+				{
+					"name": "create credit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Douglas\",\r\n    \"surName\": \"Adams\",\r\n    \"pesel\": 60129812346,\r\n    \"productName\": \"Galaxy Hitchhiking\",\r\n    \"value\": 3000.00,\r\n    \"creditName\": \"Galaxy Credit\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlCreditService}}/credits",
+							"host": [
+								"{{baseUrlCreditService}}"
+							],
+							"path": [
+								"credits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get credits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlCreditService}}/credits",
+							"host": [
+								"{{baseUrlCreditService}}"
+							],
+							"path": [
+								"credits"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customer-service",
+			"item": [
+				{
+					"name": "create customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"creditId\": 100,\r\n    \"firstName\": \"Jim\",\r\n    \"surName\": \"Jarmush\",\r\n    \"pesel\": 60060690123\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlCustomerService}}/customers",
+							"host": [
+								"{{baseUrlCustomerService}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlCustomerService}}/customers",
+							"host": [
+								"{{baseUrlCustomerService}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product-service",
+			"item": [
+				{
+					"name": "create product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"creditId\":  200,\r\n    \"productName\": \"Moon Hichhiking\",\r\n    \"value\": \"1000.00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlProductService}}/products",
+							"host": [
+								"{{baseUrlProductService}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlProductService}}/products",
+							"host": [
+								"{{baseUrlProductService}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrlCreditService",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "baseUrlCustomerService",
+			"value": "http://localhost:8200"
+		},
+		{
+			"key": "baseUrlProductService",
+			"value": "http://localhost:8100"
+		}
+	]
+}
