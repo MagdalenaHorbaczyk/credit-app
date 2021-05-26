@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mysql
+    container_name: db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+
+    volumes:
+      - ./mysql/init:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer:4.7.7
+    restart: always
+    ports:
+      - 8080:8080
+
+  credit-service:
+    container_name: credit-service
+    build:
+      context: credit-service
+      dockerfile: Dockerfile
+    image: credit-service:latest
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+    networks:
+      - spring-cloud-network
+
+  customer-service:
+    container_name: customer-service
+    build:
+      context: customer-service
+      dockerfile: Dockerfile
+    image: customer-service:latest
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8200:8200
+    networks:
+      - spring-cloud-network
+
+  product-service:
+    container_name: product-service
+    build:
+      context: product-service
+      dockerfile: Dockerfile
+    image: product-service:latest
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8100:8100
+    networks:
+      - spring-cloud-network
+
+networks:
+  spring-cloud-network:
+    driver: bridge
+
+
