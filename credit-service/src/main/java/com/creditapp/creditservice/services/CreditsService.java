@@ -60,27 +60,40 @@ public class CreditsService {
     }
 
     public CreateCreditResponse createCredit(CreateCreditRequest request) {
+        Credit savedCredit = getCredit(request);
+        saveNewProduct(request, savedCredit);
+        saveNewCustomer(request, savedCredit);
+        Long creditNo = savedCredit.getId();
+        return getCreateCreditResponse(creditNo);
+    }
+
+    private CreateCreditResponse getCreateCreditResponse(Long creditNo) {
+        CreateCreditResponse response = new CreateCreditResponse();
+        response.setCreditNo(creditNo);
+        return response;
+    }
+
+    private Credit getCredit(CreateCreditRequest request) {
         CreateCreditRequest creditToSave = new CreateCreditRequest();
         creditToSave.setCreditName(request.getCreditName());
-        Credit savedCredit = creditsRepository.save(modelMapper.map((creditToSave), Credit.class));
+        return creditsRepository.save(modelMapper.map((creditToSave), Credit.class));
+    }
 
-        CreateProductRequest productToSave = new CreateProductRequest();
-        productToSave.setCreditId(savedCredit.getId());
-        productToSave.setProductName(request.getProductName());
-        productToSave.setValue((request.getValue()));
-        productProxy.createProduct(productToSave);
-
+    private void saveNewCustomer(CreateCreditRequest request, Credit savedCredit) {
         CreateCustomerRequest customerToSave = new CreateCustomerRequest();
         customerToSave.setCreditId(savedCredit.getId());
         customerToSave.setFirstName(request.getFirstName());
         customerToSave.setSurName(request.getSurName());
         customerToSave.setPesel(request.getPesel());
         customerProxy.createCustomer(customerToSave);
+    }
 
-        Long creditNo = savedCredit.getId();
-        CreateCreditResponse response = new CreateCreditResponse();
-        response.setCreditNo(creditNo);
-        return response;
+    private void saveNewProduct(CreateCreditRequest request, Credit savedCredit) {
+        CreateProductRequest productToSave = new CreateProductRequest();
+        productToSave.setCreditId(savedCredit.getId());
+        productToSave.setProductName(request.getProductName());
+        productToSave.setValue((request.getValue()));
+        productProxy.createProduct(productToSave);
     }
 }
 
