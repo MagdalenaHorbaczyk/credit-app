@@ -39,24 +39,26 @@ public class CreditsService {
         List<CustomerForGetCustomersResponse> getCustomersResponse = customerProxy.getAllCustomers();
         List<ProductForGetProductsResponse> getProductsResponse = productProxy.getAllProducts();
 
-        for (Credit credit : allCredits) {
-            for (CustomerForGetCustomersResponse customerResponse : getCustomersResponse) {
-                for (ProductForGetProductsResponse productResponse : getProductsResponse) {
-                    if (credit.getId() == customerResponse.getCreditId() && credit.getId() == productResponse.getCreditId()) {
-                        CreditForGetCreditsResponse creditResponse = new CreditForGetCreditsResponse();
-                        creditResponse.setId(credit.getId());
-                        creditResponse.setCreditName(credit.getCreditName());
-                        creditResponse.setProductName(productResponse.getProductName());
-                        creditResponse.setValue(productResponse.getValue());
-                        creditResponse.setFirstName(customerResponse.getFirstName());
-                        creditResponse.setSurName(customerResponse.getSurName());
-                        creditResponse.setPesel(customerResponse.getPesel());
-                        allCreditsResponse.add(creditResponse);
-                    }
-                }
+        allCredits.forEach(credit -> getCustomersResponse.forEach(customerResponse -> getProductsResponse.forEach(productResponse -> {
+            if (credit.getId().equals(customerResponse.getCreditId()) && credit.getId().equals(productResponse.getCreditId())) {
+                CreditForGetCreditsResponse creditResponse = setCreditsResponse(credit, customerResponse, productResponse);
+                allCreditsResponse.add(creditResponse);
             }
-        }
+        })));
         return allCreditsResponse;
+    }
+
+    private CreditForGetCreditsResponse setCreditsResponse(Credit credit, CustomerForGetCustomersResponse
+            customerResponse, ProductForGetProductsResponse productResponse) {
+        CreditForGetCreditsResponse creditResponse = new CreditForGetCreditsResponse();
+        creditResponse.setId(credit.getId());
+        creditResponse.setCreditName(credit.getCreditName());
+        creditResponse.setProductName(productResponse.getProductName());
+        creditResponse.setValue(productResponse.getValue());
+        creditResponse.setFirstName(customerResponse.getFirstName());
+        creditResponse.setSurName(customerResponse.getSurName());
+        creditResponse.setPesel(customerResponse.getPesel());
+        return creditResponse;
     }
 
     public CreateCreditResponse createCredit(CreateCreditRequest request) {
