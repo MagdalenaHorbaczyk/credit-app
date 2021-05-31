@@ -11,11 +11,4 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CreateCreditResponse {
     private Long creditNo;
-
-    @Override
-    public String toString() {
-        return "CreateCreditResponse{" +
-                "creditNo=" + creditNo +
-                '}';
-    }
 }

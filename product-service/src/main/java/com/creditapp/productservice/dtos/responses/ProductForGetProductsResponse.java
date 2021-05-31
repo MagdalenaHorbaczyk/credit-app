@@ -14,14 +14,4 @@ public class ProductForGetProductsResponse {
     private long creditId;
     private String productName;
     private int value;
-
-    @Override
-    public String toString() {
-        return "ProductForGetProductsResponse{" +
-                "id=" + id +
-                ", creditId=" + creditId +
-                ", productName='" + productName + '\'' +
-                ", value=" + value +
-                '}';
-    }
 }

@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 public class CreateProductRequest {
 
     @NotNull(message = "Please provide a credit number")
-    @Digits(integer=15, fraction=0, message = "Please provide value in format: 0")
+    @Digits(integer = 15, fraction = 0, message = "Please provide value in format: 0")
     @Column(unique = true, nullable = false)
     private Long creditId;
 
@@ -25,15 +25,7 @@ public class CreateProductRequest {
     private String productName;
 
     @DecimalMin(value = "0.0", inclusive = false)
-    @Digits(integer=12, fraction=2, message = "Please provide value in format: 0.0")
+    @Digits(integer = 12, fraction = 2, message = "Please provide value in format: 0.0")
     private BigDecimal value;
-
-    @Override
-    public String toString() {
-        return "CreateProductRequest{" +
-                "creditId=" + creditId +
-                ", productName='" + productName + '\'' +
-                ", value=" + value +
-                '}';
-    }
 }
+

@@ -18,10 +18,6 @@ public class HttpException extends RuntimeException {
         return message;
     }
 
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
-    }
-
     @Override
     public String toString() {
         return "HttpException{" +
