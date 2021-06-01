@@ -1,7 +1,12 @@
 version: '3.8'
 
-services:
+#While running credit-app images in Docker containers there is an issue related to connecting services containers
+#to database container (Caused by: java.net.ConnectException: Connection refused).
+#Despite the countless number of attempts to check various solutions, such as those exchanged for Stackoverflow,
+#due to time constraints, no effective solution to correct configuration has yet been found.
+#https://stackoverflow:com/questions/6865538/solving-a-communications-link-failure-with-jdbc-and-mysql
 
+services:
   db:
     image: mysql
     container_name: db
