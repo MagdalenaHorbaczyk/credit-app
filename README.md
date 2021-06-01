@@ -1,6 +1,7 @@
-###### credit-app
+## credit-app
+Spring Boot app for Inteca evaluation
 
-###### _**Requirements**_
+## _**Requirements**_
 
 - JDK 8 (min)
   
@@ -8,12 +9,12 @@
   
 - Maven
 
-###### _**Testing the endpoints**_
+## _**Testing the endpoints**_
 
 Endpoints can be tested by Postman. For the convenience there is a Postman collection file 
 added in the root directory.
 
-###### _**Compiling & building**_
+## _**Compiling & building**_
 
 "mvnw package"
 
