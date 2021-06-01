@@ -36,10 +36,10 @@ services:
     restart: always
     depends_on:
       - db
+      - customer-service
+      - product-service
     ports:
       - 8000:8000
-    networks:
-      - spring-cloud-network
 
   customer-service:
     container_name: customer-service
@@ -52,8 +52,6 @@ services:
       - db
     ports:
       - 8200:8200
-    networks:
-      - spring-cloud-network
 
   product-service:
     container_name: product-service
@@ -66,11 +64,6 @@ services:
       - db
     ports:
       - 8100:8100
-    networks:
-      - spring-cloud-network
 
-networks:
-  spring-cloud-network:
-    driver: bridge
 
 
